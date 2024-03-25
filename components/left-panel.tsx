@@ -9,7 +9,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { buttonVariants } from "./ui/button";
 import prisma from "@/prisma/client";
-import { getUser } from "@/lib/auth";
 import { ScrollArea } from "./ui/scroll-area";
 
 export default function LeftPanel() {
@@ -38,8 +37,11 @@ export default function LeftPanel() {
 }
 
 async function ConversationList() {
-  const session = await getUser();
-  if (!session?.user) return null;
+  const session = {
+    user: {
+      id: ""
+    }
+  };
   const res = await prisma.user.findUnique({
     where: {
       id: session.user.id,

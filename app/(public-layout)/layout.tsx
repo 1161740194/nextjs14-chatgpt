@@ -1,11 +1,13 @@
 import HeroNav from "@/components/hero-nav";
-import { getUser } from "@/lib/auth";
+import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { PropsWithChildren } from "react";
 
 export default async function PublicLayout({ children }: PropsWithChildren) {
-  const session = await getUser();
-  if (session?.user) redirect("/chat");
+  const { userId } = auth();
+  if (userId) {
+    redirect('/chat');
+  }
   return (
     <div>
       <HeroNav />

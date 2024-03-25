@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import NextAuthProvider from "@/components/session-provider";
+import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from "@/components/ui/toaster";
+import { dark } from '@clerk/themes';
 import "./globals.css";
 
 const font = Space_Grotesk({ subsets: ["latin"], weight: "400" });
@@ -18,7 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <NextAuthProvider>
+    <ClerkProvider appearance={{
+      baseTheme: dark
+    }}>
       <html lang="en" suppressHydrationWarning>
         <body className={`${font.className}`} suppressHydrationWarning>
           <ThemeProvider
@@ -32,6 +35,6 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </NextAuthProvider>
+    </ClerkProvider>
   );
 }

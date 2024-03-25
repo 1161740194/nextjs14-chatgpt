@@ -2,6 +2,7 @@ import Link from "next/link";
 import { NamedLogoWithLink } from "./logo";
 import { buttonVariants } from "./ui/button";
 import ToggleTheme from "./toggle";
+import { UserButton } from "@clerk/nextjs";
 
 export default function HeroNav() {
   return (
@@ -9,26 +10,7 @@ export default function HeroNav() {
       <NamedLogoWithLink />
       <div className="flex flex-row items-center">
         <ToggleTheme />
-        <Link
-          href="/login"
-          className={buttonVariants({
-            variant: "link",
-            className: "text-base sm:ml-3",
-            size: "sm",
-          })}
-        >
-          Login
-        </Link>
-        <Link
-          href="/register"
-          className={buttonVariants({
-            variant: "link",
-            className: "text-base",
-            size: "sm",
-          })}
-        >
-          Register
-        </Link>
+        <UserButton />
       </div>
     </nav>
   );

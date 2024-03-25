@@ -1,6 +1,5 @@
 "use server";
 
-import { getUser } from "@/lib/auth";
 import { generateRandomId } from "@/lib/utils";
 import prisma from "@/prisma/client";
 import { JsonMessagesArraySchema } from "@/types";
@@ -17,8 +16,6 @@ export type Message = {
 export type NewMessage = Omit<Message, "conversationId">;
 
 export async function newChat(params: NewMessage) {
-  const session = await getUser();
-  if (!session?.user) redirect("/login");
   let id: string | undefined;
   let error: undefined | { message: string };
   try {
@@ -38,7 +35,7 @@ export async function newChat(params: NewMessage) {
       data: {
         messages: newMessageJson,
         name: params.message,
-        userId: session.user.id,
+        userId: "",
       },
     });
     id = dataRef.id;

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import ToggleTheme from "./toggle";
 import { NamedLogoWithLink } from "./logo";
-import Profile from "./profile";
 import { SquarePen } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
 
 const btnVariant = buttonVariants({
   variant: "link",
@@ -22,7 +22,7 @@ export default function Navbar() {
             <SquarePen className="w-5 h-5 sm:hidden flex" />
             <span className="sm:flex hidden">New chat</span>
           </Link>
-          <Profile />
+          <UserButton />
         </div>
       </div>
     </nav>
